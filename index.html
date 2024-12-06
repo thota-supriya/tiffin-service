@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome to the Tiffin Service</h1>
+<p>Your daily dose of home-cooked meals delivered right to your doorstep.</p>
+
+<h2>Today's Menu</h2>
+{% if dishes %}
+    {% for dish in dishes %}
+        <h3>{{ dish.name }}</h3>
+        <p>{{ dish.description }}</p>
+        <p>₹ {{ dish.price }}</p>
+        <button>Order Now</button>
+    {% endfor %}
+{% else %}
+    <p>No dishes available at the moment.</p>
+{% endif %}
+
+{% if session.get('user_id') %}
+    <a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+    <a href="{{ url_for('register') }}">Register</a>
+{% endif %}
+{% endblock %}
